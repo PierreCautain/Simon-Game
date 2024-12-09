@@ -6,7 +6,7 @@ var gamePattern = [];
 var started = false;
 var level = 0;
 
-$(document).on("keypress click", function() { // when a key is pressed or document is clicked
+$(document).keypress(function() { // when a key is pressed or document is clicked
     if (!started) {
         $("#level-title").text("Level " + level);
         nextSequence();
@@ -16,7 +16,7 @@ $(document).on("keypress click", function() { // when a key is pressed or docume
 
 $(".btn").click(function() {
     if (!started) {
-        return;  // Exit if game hasn't started
+        return;  // Exit immediately if game hasn't started
     }
 
     var userChosenColor = $(this).attr("id");
@@ -29,6 +29,10 @@ $(".btn").click(function() {
 });
 
 function checkAnswer(currentLevel) {
+    if (!started) {
+        return;  // Extra safety check
+    }
+    
     console.log("Checking level " + currentLevel);
     console.log("User pattern: " + userClickedPattern);
     console.log("Game pattern: " + gamePattern);
@@ -69,7 +73,7 @@ function nextSequence() { // function to start the next sequence
     
     console.log("New Game Pattern: " + gamePattern);  // Log the new game pattern
     
-    $("#" + randomChosenColor).fadeOut(100).fadeIn(100); // animate the button
+    $("#" + randomChosenColor).fadeIn(100).fadeOut(100).fadeIn(100); // animate the button
     playSound(randomChosenColor); // play the sound
    
 }
