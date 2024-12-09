@@ -14,7 +14,10 @@ $(document).keypress(function() { // when a key is pressed
     }
 });
 
-$(".btn").click(function() {  // when a button is clicked
+$(".btn").click(function() {
+    if (!started) {
+        return;  // Exit if game hasn't started
+    }
 
     var userChosenColor = $(this).attr("id");
     userClickedPattern.push(userChosenColor);
@@ -22,7 +25,6 @@ $(".btn").click(function() {  // when a button is clicked
     playSound(userChosenColor);
     animatePress(userChosenColor);
 
-    //2. Call checkAnswer() after a user has clicked and chosen their answer, passing in the index of the last answer in the user's sequence.
     checkAnswer(userClickedPattern.length-1);
 });
 
