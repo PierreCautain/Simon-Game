@@ -16,20 +16,22 @@ body {
 
 .container {
   display: grid;
-  grid-template-columns: repeat(2, 2fr);
-  grid-template-rows: repeat(2, 2fr);
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 10px;
   margin: auto;
+  padding: 20px;
   width: 50%;
-  align-items: center;
 }
 
 .btn {
-  margin: 10px;
-  display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 10px solid black;
+  width: 50%;
+  height: 50%;
+  padding: 5px;
+  margin: 5px;
+  border: 5px solid black;
   border-radius: 20%;
+  aspect-ratio: 2;
 }
 
 .game-over {
@@ -61,4 +63,14 @@ body {
 .game-over {
   background-color: red;
   opacity: 0.8;
+}
+
+* {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none;   /* Chrome/Safari/Opera */
+  -khtml-user-select: none;    /* Konqueror */
+  -moz-user-select: none;      /* Firefox */
+  -ms-user-select: none;       /* Internet Explorer/Edge */
+  user-select: none;           /* Non-prefixed version */
+  touch-action: manipulation;  /* Disable double-tap zooming */
 }
