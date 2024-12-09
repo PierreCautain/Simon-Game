@@ -6,7 +6,7 @@ var gamePattern = [];
 var started = false;
 var level = 0;
 
-$(document).keypress(function() { // when a key is pressed
+$(document).on ("keypress click", function() { // when a key is pressed or document is clicked
     if (!started) {
         $("#level-title").text("Level " + level);
         nextSequence();
