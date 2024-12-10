@@ -171,3 +171,8 @@ function startOver() {
     $(".btn").addClass("game-started");
     nextSequence();
 }
+
+
+
+
+
