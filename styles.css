@@ -29,6 +29,7 @@ body {
   border: 10px solid black;
   border-radius: 20%;
   aspect-ratio: 2;
+  transition: all 0.2s ease;
 }
 
 .game-over {
@@ -55,6 +56,7 @@ body {
 .pressed {
   box-shadow: 0 0 20px white;
   background-color: grey;
+  animation: pressAndRelease 0.5s forwards;
 }
 
 .game-over {
@@ -70,4 +72,15 @@ body {
   -ms-user-select: none;       /* Internet Explorer/Edge */
   user-select: none;           /* Non-prefixed version */
   touch-action: manipulation;  /* Disable double-tap zooming */
+}
+
+@keyframes pressAndRelease {
+  0% {
+    box-shadow: 0 0 20px white;
+    background-color: grey;
+  }
+  100% {
+    box-shadow: none;
+    background-color: initial;
+  }
 }

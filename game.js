@@ -14,13 +14,39 @@ $(document).on("keypress click", function() { // when a key is pressed or docume
     }
 });
 
-$(".btn").on("touchstart mousedown", function() {
-    if (!started) {
-        return;
-    }
+$(".btn").on("mouseenter touchstart", function(e) {
+    e.preventDefault();  // Prevent any default behavior
     
     var userChosenColor = $(this).attr("id");
-    playSound(userChosenColor);
+    var button = $(this);
+    
+    // Only add the pressed class if it's not already pressed
+    if (!button.hasClass("pressed")) {
+        // Store the original background color
+        var originalColor = button.css('background-color');
+        
+        button.addClass("pressed");
+        // Only play sound if game has started
+        if (started) {
+            playSound(userChosenColor);
+        }
+        
+        // Always remove the pressed class and restore original color after 200ms
+        setTimeout(function() {
+            button.removeClass("pressed");
+            button.css('background-color', originalColor);
+            button.css('opacity', '1');  // Force opacity back to 1
+        }, 200);
+    }
+}).on("mouseleave", function() {
+    // Optional: handle mouse leave if needed
+    $(this).removeClass("pressed");
+});
+
+// Keep the touch handler separate
+$(document).on("touchend touchcancel", function(e) {
+    e.preventDefault();
+    $(".btn").removeClass("pressed");
 });
 
 $(".btn").on("click touchend", function() {
@@ -78,10 +104,16 @@ function nextSequence() { // function to start the next sequence
     
     console.log("New Game Pattern: " + gamePattern);  // Log the new game pattern
     
-    $("#" + randomChosenColor).fadeIn(100).fadeOut(100).fadeIn(100); // animate the button
-    playSound(randomChosenColor); // play the sound
-   
-}
+    // Modified animation to ensure button reappears
+    $("#" + randomChosenColor)
+        .fadeOut(100)
+        .fadeIn(100, function() {
+            // Ensure button is fully visible after animation
+            $(this).css('opacity', '1');
+        });
+    
+    playSound(randomChosenColor);
+} 
 
 function playSound(name) {
     var audio = new Audio("sounds/" + name + ".mp3");
