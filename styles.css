@@ -7,8 +7,19 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  background: linear-gradient(to bottom right, rgb(0, 81, 255), red);
+  animation: gradientOscillation 10s infinite alternate;
+  background-size: 200% 200%;
 }
 
+@keyframes gradientOscillation {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
 
 #level-title {
   font-family: 'Press Start 2P', cursive;
@@ -105,6 +116,7 @@ body {
     background-color: initial;
   }
 }
+
 
 .footer {
   position: relative;
