@@ -98,7 +98,7 @@ function gameOver() {
     
     setTimeout(function() {
         $("body").removeClass("game-over");
-    }, 2000);
+    }, 1000);
 
     // Add restart handler after a slight delay
     setTimeout(function() {
@@ -124,7 +124,7 @@ function nextSequence() { // function to start the next sequence
     
     // Modified animation to ensure button reappears
     $("#" + randomChosenColor)
-        .fadeOut(100)
+        .fadeOut(250)
         .fadeIn(100, function() {
             // Ensure button is fully visible after animation
             $(this).css('opacity', '1');
