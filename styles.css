@@ -114,6 +114,10 @@ body {
   }
 }
 
+.btn:not(.game-started) {
+  pointer-events: none;  /* Disable hover effects when game hasn't started */
+}
+
 @media (min-width: 425px) and (max-width: 767px) {
   #level-title {
     font-size: 0.8rem;

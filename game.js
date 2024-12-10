@@ -9,6 +9,7 @@ var level = 0;
 $(document).on("keypress click touchstart touchend", function() { // when a key is pressed or document is clicked
     if (!started) {
         $("#level-title").text("Level " + level);
+        $(".btn").addClass("game-started");  // Add class when game starts
         nextSequence();
         started = true;
     }
@@ -17,6 +18,11 @@ $(document).on("keypress click touchstart touchend", function() { // when a key 
 // Visual feedback on hover/touch without sound
 $(".btn").on("mouseenter touchstart", function(e) {
     e.preventDefault();
+    
+    // Skip everything if game hasn't started
+    if (!started) {
+        return;  // Exit early if game hasn't started
+    }
     
     var button = $(this);
     
@@ -31,6 +37,10 @@ $(".btn").on("mouseenter touchstart", function(e) {
         }, 200);
     }
 }).on("mouseleave", function() {
+    // Skip everything if game hasn't started
+    if (!started) {
+        return;  // Exit early if game hasn't started
+    }
     $(this).removeClass("pressed");
 });
 
@@ -49,6 +59,10 @@ $(".btn").on("click touchend", function() {
 // Remove any sound playing from other event handlers
 $(document).on("touchend touchcancel", function(e) {
     e.preventDefault();
+    // Skip everything if game hasn't started
+    if (!started) {
+        return;  // Exit early if game hasn't started
+    }
     $(".btn").removeClass("pressed");
 });
 
@@ -126,6 +140,7 @@ function startOver() {
     userClickedPattern = [];
     $("#level-title").text("Level " + level);
     $(".btn").removeClass("pressed");
+    $(".btn").addClass("game-started");  // Add class when restarting
     level = 0;
     nextSequence();
 }
