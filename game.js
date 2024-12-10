@@ -70,25 +70,19 @@ function checkAnswer(currentLevel) {
             }, 1000);
         } 
     } else {
-        // Wrong click
-        playSound("wrong");
-        $("#level-title").text("Click/Touch/Press to Restart");
-        $("body").addClass("game-over");
-        
-        setTimeout(function() {
-            $("body").removeClass("game-over");
-        }, 2000);
-        
-        // Reset game state
-        started = false;
-        
-        // Listen for any interaction to restart
-        $(document).on("keypress click touchstart", function() {
-            startOver();
-            // Remove the event listener after it's used
-            $(document).off("keypress click touchstart");
-        });
-    }
+            // Wrong click
+            playSound("wrong");
+            $("#level-title").text("Click/Touch/Press to Restart");
+            $("body").addClass("game-over");
+            setTimeout(function() {
+                $("body").removeClass("game-over");
+            }, 2000);
+            $(document).keypress(function() {
+                started = false;
+                startOver()
+    
+            });
+        }
 }
 
 function nextSequence() { // function to start the next sequence
