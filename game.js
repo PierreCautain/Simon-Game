@@ -6,8 +6,14 @@ var gamePattern = [];
 var started = false;
 var level = 0;
 
+$(document).ready(function() {
+    // Add blinking to initial title
+    $("#level-title").addClass("blink-text");
+});
+
 $(document).on("keypress click touchstart touchend", function() { // when a key is pressed or document is clicked
     if (!started) {
+        $("#level-title").removeClass("blink-text"); // Stop blinking when game starts
         $("#level-title").text("Level " + level);
         $(".btn").addClass("game-started");  // Add class when game starts
         nextSequence();
@@ -91,6 +97,7 @@ function gameOver() {
     started = false;  // Set started to false first
     $(".btn").removeClass("game-started");
     $("#level-title").text("Click/Touch/Press to Restart");  // Set text
+    $("#level-title").addClass("blink-text"); // Add blinking on game over
     $("body").addClass("game-over");
     
     // Remove any existing handlers
@@ -150,6 +157,7 @@ function startOver() {
     userClickedPattern = [];
     level = 0;
     started = true; 
+    $("#level-title").removeClass("blink-text"); // Stop blinking when game restarts
     $(".btn").removeClass("pressed");
     $(".btn").addClass("game-started");
     nextSequence();
