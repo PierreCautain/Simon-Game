@@ -72,7 +72,7 @@ function checkAnswer(currentLevel) {
     } else {
             // Wrong click
             playSound("wrong");
-            $("#level-title").text("Game Over, Press Any Key to Restart");
+            $("#level-title").text("Click/Touch/Press to Restart");
             $("body").addClass("game-over");
             setTimeout(function() {
                 $("body").removeClass("game-over");

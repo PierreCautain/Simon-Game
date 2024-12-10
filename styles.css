@@ -30,7 +30,7 @@ body {
 .btn {
   width: 100%;
   height: auto;
-  margin: 10px;
+  margin: 0.3rem;
   column-gap: 50px;
   border: 10px solid black;
   border-radius: 20%;
@@ -108,7 +108,7 @@ body {
     font-size: 1.3rem;
   }
   .container {
-    gap: 0.8rem;
+    gap: 0.5rem;
     size-adjust: 50vw;
     max-width: 600px;
   }
@@ -125,3 +125,13 @@ body {
   }
 }
 
+@media (max-width: 425px) {
+  #level-title {
+    font-size: 0.6rem;
+  }
+  .container {
+    gap: 0.5rem;
+    size-adjust: 90vw;
+    max-width: 300px;
+  }
+} 
