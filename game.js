@@ -142,7 +142,7 @@ function animatePress(currentColor) {
     $("#" + currentColor).addClass("pressed");
     setTimeout(function() {
         $("#" + currentColor).removeClass("pressed");
-    }, 100);
+    }, 200);
 }
 
 function startOver() {
