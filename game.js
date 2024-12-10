@@ -11,11 +11,16 @@ $(document).ready(function() {
     $("#level-title").addClass("blink-text");
 });
 
-$(document).on("keypress click touchstart touchend", function() { // when a key is pressed or document is clicked
+$(document).on("keypress click touchstart touchend", function(e) {
+    // Prevent default behavior for touch events to avoid conflicts
+    if (e.type.startsWith('touch')) {
+        e.preventDefault();
+    }
+    
     if (!started) {
-        $("#level-title").removeClass("blink-text"); // Stop blinking when game starts
+        $("#level-title").removeClass("blink-text");
         $("#level-title").text("Level " + level);
-        $(".btn").addClass("game-started");  // Add class when game starts
+        $(".btn").addClass("game-started");
         nextSequence();
         started = true;
     }
@@ -94,13 +99,13 @@ function checkAnswer(currentLevel) {
 // Separate game over function
 function gameOver() {
     playSound("wrong");
-    started = false;  // Set started to false first
+    started = false;
     $(".btn").removeClass("game-started");
-    $("#level-title").text("Click/Touch/Press to Restart");  // Set text
-    $("#level-title").addClass("blink-text"); // Add blinking on game over
+    $("#level-title").text("Click/Touch/Press to Restart");
+    $("#level-title").addClass("blink-text");
     $("body").addClass("game-over");
     
-    // Remove any existing handlers
+    // Remove any existing handlers to prevent duplicates
     $(document).off("keypress click touchstart touchend");
     
     setTimeout(function() {
@@ -109,7 +114,11 @@ function gameOver() {
 
     // Add restart handler after a slight delay
     setTimeout(function() {
-        $(document).one("keypress click touchstart touchend", function() {
+        $(document).one("keypress click touchstart touchend", function(e) {
+            // Prevent default behavior for touch events
+            if (e.type.startsWith('touch')) {
+                e.preventDefault();
+            }
             if (!started) {
                 startOver();
             }
