@@ -125,7 +125,7 @@ function nextSequence() { // function to start the next sequence
     // Modified animation to ensure button reappears
     $("#" + randomChosenColor)
         .fadeOut(250)
-        .fadeIn(100, function() {
+        .fadeIn(250, function() {
             // Ensure button is fully visible after animation
             $(this).css('opacity', '1');
         });
