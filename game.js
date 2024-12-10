@@ -14,50 +14,42 @@ $(document).on("keypress click touchstart touchend", function() { // when a key 
     }
 });
 
+// Visual feedback on hover/touch without sound
 $(".btn").on("mouseenter touchstart", function(e) {
-    e.preventDefault();  // Prevent any default behavior
+    e.preventDefault();
     
-    var userChosenColor = $(this).attr("id");
     var button = $(this);
     
-    // Only add the pressed class if it's not already pressed
     if (!button.hasClass("pressed")) {
-        // Store the original background color
         var originalColor = button.css('background-color');
-        
         button.addClass("pressed");
-        // Only play sound if game has started
-        if (started) {
-            playSound(userChosenColor);
-        }
         
-        // Always remove the pressed class and restore original color after 200ms
         setTimeout(function() {
             button.removeClass("pressed");
             button.css('background-color', originalColor);
-            button.css('opacity', '1');  // Force opacity back to 1
+            button.css('opacity', '1');
         }, 200);
     }
 }).on("mouseleave", function() {
-    // Optional: handle mouse leave if needed
     $(this).removeClass("pressed");
 });
 
-// Keep the touch handler separate
-$(document).on("touchend touchcancel", function(e) {
-    e.preventDefault();
-    $(".btn").removeClass("pressed");
-});
-
+// Sound and game logic only on click/touch
 $(".btn").on("click touchend", function() {
-    // If game hasn't started, ignore the button press
     if (!started) {
-        return;  // Don't process the click until game has started
+        return;
     }
     
     var userChosenColor = $(this).attr("id");
     userClickedPattern.push(userChosenColor);
+    playSound(userChosenColor);  // Only play sound on actual click/touch
     checkAnswer(userClickedPattern.length-1);
+});
+
+// Remove any sound playing from other event handlers
+$(document).on("touchend touchcancel", function(e) {
+    e.preventDefault();
+    $(".btn").removeClass("pressed");
 });
 
 function checkAnswer(currentLevel) {
