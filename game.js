@@ -14,16 +14,13 @@ $(document).on("keypress click", function() { // when a key is pressed or docume
     }
 });
 
-$(".btn").on("touchstart mousedown", function(e) {
+$(".btn").on("touchstart mousedown", function() {
     if (!started) {
         return;
     }
     
     var userChosenColor = $(this).attr("id");
-    $(this).addClass("pressed");
     playSound(userChosenColor);
-}).on("touchend touchcancel mouseup mouseleave", function() {
-    $(this).removeClass("pressed");
 });
 
 $(".btn").on("click touchend", function() {
