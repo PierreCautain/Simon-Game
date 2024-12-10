@@ -11,10 +11,10 @@ body {
 
 #level-title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 2rem;
+  font-size: 1.3rem;
   width: 90%;
-  color: #FEF2BF;
   height: 100px;
+  color: #FEF2BF;
   display: flex;
   align-items: center;
   justify-content: center;
