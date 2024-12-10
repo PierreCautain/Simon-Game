@@ -101,7 +101,7 @@ function gameOver() {
     playSound("wrong");
     started = false;
     $(".btn").removeClass("game-started");
-    $("#level-title").text("Game Over! Click/Touch/Press to Restart");
+    $("#level-title").text("Game Over ! Click/Touch/Press to Restart");
     $("#level-title").addClass("blink-text");
     $("body").addClass("game-over");
     
