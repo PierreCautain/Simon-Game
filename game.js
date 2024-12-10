@@ -14,17 +14,25 @@ $(document).on("keypress click", function() { // when a key is pressed or docume
     }
 });
 
-$(".btn").click(function() {
+$(".btn").on("touchstart mousedown", function(e) {
     if (!started) {
-        return;  // Exit immediately if game hasn't started
+        return;
     }
+    
+    var userChosenColor = $(this).attr("id");
+    $(this).addClass("pressed");
+    playSound(userChosenColor);
+}).on("touchend touchcancel mouseup mouseleave", function() {
+    $(this).removeClass("pressed");
+});
 
+$(".btn").on("click touchend", function() {
+    if (!started) {
+        return;
+    }
+    
     var userChosenColor = $(this).attr("id");
     userClickedPattern.push(userChosenColor);
-   
-    playSound(userChosenColor);
-    animatePress(userChosenColor);
-
     checkAnswer(userClickedPattern.length-1);
 });
 
@@ -92,7 +100,7 @@ function animatePress(currentColor) {
 
 function startOver() {
     gamePattern = [];
-    started = true;
+    started = true; 
     userClickedPattern = [];
     $("#level-title").text("Level " + level);
     $(".btn").removeClass("pressed");
