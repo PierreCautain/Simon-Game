@@ -66,9 +66,9 @@ body {
 }
 
 .pressed {
-  box-shadow: 0 0 20px white;
-  background-color: grey;
-  animation: pressAndRelease 0.5s forwards;
+  box-shadow: 5 0 20px white;
+  background-color: rgb(255, 255, 255);
+  animation: pressAndRelease 1s forwards;
 }
 
 .game-over {
