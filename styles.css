@@ -11,7 +11,7 @@ body {
 
 #level-title {
   font-family: 'Press Start 2P', cursive;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
   width: 90%;
   height: 100px;
   color: #FEF2BF;
@@ -25,7 +25,7 @@ body {
 .container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  gap: 0.9rem;
   width: 90vw;
   max-width: 800px;
   margin: 0 auto;
