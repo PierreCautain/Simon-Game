@@ -50,8 +50,9 @@ $(document).on("touchend touchcancel", function(e) {
 });
 
 $(".btn").on("click touchend", function() {
+    // If game hasn't started, ignore the button press
     if (!started) {
-        return;
+        return;  // Don't process the click until game has started
     }
     
     var userChosenColor = $(this).attr("id");
