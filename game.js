@@ -71,10 +71,6 @@ function checkAnswer(currentLevel) {
         return;  // Extra safety check
     }
     
-    console.log("Checking level " + currentLevel);
-    console.log("User pattern: " + userClickedPattern);
-    console.log("Game pattern: " + gamePattern);
-    
     // Only check if the current input matches the game pattern
     if (gamePattern[currentLevel] === userClickedPattern[currentLevel]) {
         // If we've completed the sequence, wait and go to next level
@@ -84,19 +80,34 @@ function checkAnswer(currentLevel) {
             }, 1000);
         } 
     } else {
-            // Wrong click
-            playSound("wrong");
-            $("#level-title").text("Click/Touch/Press to Restart");
-            $("body").addClass("game-over");
-            setTimeout(function() {
-                $("body").removeClass("game-over");
-            }, 2000);
-            $(document).keypress(function() {
-                started = false;
-                startOver()
+        // Wrong click - Game Over state
+        gameOver();
+    }
+}
+
+// Separate game over function
+function gameOver() {
+    playSound("wrong");
+    started = false;  // Set started to false first
+    $(".btn").removeClass("game-started");
+    $("#level-title").text("Click/Touch/Press to Restart");  // Set text
+    $("body").addClass("game-over");
     
-            });
-        }
+    // Remove any existing handlers
+    $(document).off("keypress click touchstart touchend");
+    
+    setTimeout(function() {
+        $("body").removeClass("game-over");
+    }, 2000);
+
+    // Add restart handler after a slight delay
+    setTimeout(function() {
+        $(document).one("keypress click touchstart touchend", function() {
+            if (!started) {
+                startOver();
+            }
+        });
+    }, 100);
 }
 
 function nextSequence() { // function to start the next sequence
@@ -136,11 +147,10 @@ function animatePress(currentColor) {
 
 function startOver() {
     gamePattern = [];
-    started = true; 
     userClickedPattern = [];
-    $("#level-title").text("Level " + level);
-    $(".btn").removeClass("pressed");
-    $(".btn").addClass("game-started");  // Add class when restarting
     level = 0;
+    started = true; 
+    $(".btn").removeClass("pressed");
+    $(".btn").addClass("game-started");
     nextSequence();
 }
